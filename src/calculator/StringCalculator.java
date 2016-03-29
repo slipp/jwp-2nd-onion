@@ -9,18 +9,7 @@ public class StringCalculator {
 			return 0;
 		}
 
-		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
-		if (m.find()) {
-			return sum(toInt(splitCustomDelimeter(m)));
-		}
-
-		return sum(toInt(split(text)));
-	}
-
-	private String[] splitCustomDelimeter(Matcher m) {
-		String customDelimeter = m.group(1);
-		String[] tokens = m.group(2).split(customDelimeter);
-		return tokens;
+		return sum(toInts(split(text)));
 	}
 
 	private boolean isBlank(String text) {
@@ -28,10 +17,16 @@ public class StringCalculator {
 	}
 
 	private String[] split(String text) {
+		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+		if (m.find()) {
+			String customDelimeter = m.group(1);
+			return m.group(2).split(customDelimeter);
+		}
+		
 		return text.split(",|:");
 	}
-
-	private int[] toInt(String[] values) {
+	
+	private int[] toInts(String[] values) {
 		int[] numbers = new int[values.length];
 		for (int i = 0; i < values.length; i++) {
 			numbers[i] = toPositive(values[i]);

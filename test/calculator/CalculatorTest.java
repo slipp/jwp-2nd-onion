@@ -1,27 +1,34 @@
 package calculator;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 public class CalculatorTest {
-	public static void main(String[] args) {
-		Calculator cal = new Calculator();
-		add(cal);
-		subtract(cal);
-		multiply(cal);
-		divide(cal);
+	private Calculator cal;
+	
+	@Before
+	public void setup() {
+		cal = new Calculator();
+		System.out.println("setup!");
 	}
 
-	private static void divide(Calculator cal) {
-		System.out.println(cal.divide(9, 3));
+	@Test
+	public void add() {
+		assertEquals(3, cal.add(2, 1));
+		System.out.println("add!");
 	}
-
-	private static void multiply(Calculator cal) {
-		System.out.println(cal.multiply(9, 3));
+	
+	@Test
+	public void divide() {
+		assertEquals(3, cal.divide(9, 3));
+		System.out.println("divide!");
 	}
-
-	private static void subtract(Calculator cal) {
-		System.out.println(cal.subtract(9, 3));
-	}
-
-	private static void add(Calculator cal) {
-		System.out.println(cal.add(9, 3));
+	
+	@After
+	public void teardown() {
+		System.out.println("teardown!");
 	}
 }
